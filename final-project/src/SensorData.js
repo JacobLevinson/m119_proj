@@ -19,37 +19,56 @@ const SensorData = () => {
     });
 
     useEffect(() => {
-        const fetchData = () => {
-            // Simulate changing sensor values
-            setSensorValues1(prevValues => ({
-                "2101": getRandomValue(prevValues["2101"]),
-                "2102": getRandomValue(prevValues["2102"]),
-                "2103": getRandomValue(prevValues["2103"]),
-                "2104": getRandomValue(prevValues["2104"])
-            }));
 
-            setSensorValues2(prevValues => ({
-                "2101": getRandomValue(prevValues["2101"]),
-                "2102": getRandomValue(prevValues["2102"]),
-                "2103": getRandomValue(prevValues["2103"]),
-                "2104": getRandomValue(prevValues["2104"])
-            }));
+        // TESTING FROM HERE ///
+        // const fetchData = () => {
+        //     // Simulate changing sensor values
+        //     setSensorValues1(prevValues => ({
+        //         "2101": getRandomValue(prevValues["2101"]),
+        //         "2102": getRandomValue(prevValues["2102"]),
+        //         "2103": getRandomValue(prevValues["2103"]),
+        //         "2104": getRandomValue(prevValues["2104"])
+        //     }));
+
+        //     setSensorValues2(prevValues => ({
+        //         "2101": getRandomValue(prevValues["2101"]),
+        //         "2102": getRandomValue(prevValues["2102"]),
+        //         "2103": getRandomValue(prevValues["2103"]),
+        //         "2104": getRandomValue(prevValues["2104"])
+        //     }));
+        // };
+
+        // const getRandomValue = (prevValue) => {
+        //     const min = prevValue - 1;
+        //     const max = prevValue + 1;
+        //     return Math.random() * (max - min) + min;
+        // };
+
+        // END TESTING //
+
+        const fetchData = async () => {
+            try {
+                const response = await axios.post('http://localhost:3500/');
+
+                setSensorValues1(response.data.sensorValues);
+                // setSensorValues2(response.data.sensorValues);
+
+                response = await axios.post('http://localhost:3501/');
+
+                // setSensorValues1(response.data.sensorValues1);
+                setSensorValues2(response.data.sensorValues);
+
+
+            } catch (error) {
+                console.error('Error fetching sensor data:', error);
+            }
         };
 
-        const getRandomValue = (prevValue) => {
-            const min = prevValue - 1;
-            const max = prevValue + 1;
-            return Math.random() * (max - min) + min;
-        };
 
 
-
-
-
-
-        // const fetchData = async () => {
+        // const fetchData_2 = async () => {
         //     try {
-        //         const response = await axios.post('http://localhost:3000/');
+        //         const response = await axios.post('http://localhost:3501/');
 
         //         setSensorValues1(response.data.sensorValues1);
         //         setSensorValues2(response.data.sensorValues2);
@@ -60,7 +79,8 @@ const SensorData = () => {
         // };
 
         fetchData();
-        const interval = setInterval(fetchData, 1); // Adjust the interval as needed
+        // fetchDatae_2
+        const interval = setInterval(fetchData, 100); // Adjust the interval as needed
 
         return () => clearInterval(interval);
     }, []);
