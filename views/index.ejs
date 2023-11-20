@@ -2,174 +2,77 @@
 <html>
 
 <head>
-	<!-- <script src="https://d3js.org/d3.v7.min.js"></script> -->
+	<script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
 
 <!-- Pull in P5.JS graphics library -->
-<script
+<!-- <script
   src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js"
   integrity="sha512-WIklPM6qPCIp6d3fSSr90j+1unQHUOoWDS4sdTiR8gxUTnyZ8S2Mr8e10sKKJ/bhJgpAa/qG068RDkg6fIlNFA=="
   crossorigin="anonymous"
-></script>
+></script> -->
 <script>
-  const screenDim = 500;
-  let score = [0, 0];
-  let ball = { x: 250, y: 100, vx: 2, vy: 2 };
-  let play1 = { x: 30, y: 0, height: 100, width: 20 };
-  let play2 = { x: screenDim - 50, y: 250, height: 100, width: 20 };
-  let currValue
-  let sensorVal = 0
-  function setup() { // Runs on startup
-    frameRate(100);
-    createCanvas(screenDim, screenDim);
-  }
-  function draw() { // Runs on loop according to frameRate
-    fill("transparent");
-    rect(0, 0, screenDim, screenDim); // Draw the box around our game
-    // Show Score
-    fill("black");
-    textSize(32);
-    text(score[0] + " - " + score[1], screenDim / 2 - 40, 100);
-	textSize(20);
-	text("reading: " + sensorVal + "\nplayer position: " + play1.y, screenDim / 2 - 60, 20)
-    // Draw ball
-    fill("red");
-    ellipse(ball.x, ball.y, 10, 10); 
-    // Draw paddles
-    fill("black");
-    rect(play1.x, play1.y, play1.width, play1.height);
-    rect(play2.x, play2.y, play2.width, play2.height);
-    
-    if (ball.y > screenDim - 10 || ball.y < 10) { // Bounce off top and bottom
-      ball.vy *= -1;
-    }
-    
-    if ( // If intersecting with Paddle #1
-      ball.x < play1.x + play1.width + 10 &&
-      ball.y > play1.y &&
-      ball.y < play1.y + play1.height
-    ) {
-      ball.vx *= -1.1; // Invert and increase velocity by 10%
-      ball.vy = random(8) - 4; // Random y velocity between -4 and 4
-    }
-    
-    if ( // If intersecting with Paddle #2
-      ball.x > play2.x - 10 && // If it
-      ball.y > play2.y &&
-      ball.y < play2.y + play2.height
-    ) {
-      ball.vx *= -1.1; // Invert and increase velocity by 10%
-      ball.vy = random(8) - 4; // Random y velocity between -4 and 4
-    }
-    
-    // Move Paddles
-    // if (keyIsDown(87) && play1.y > 5) { // W is pressed
-    //   play1.y -= 4;
-    // }
-    // if (keyIsDown(83) && play1.y < screenDim - play1.height) { // S is pressed
-    //   play1.y += 4;
-    // }
-    if (keyIsDown(UP_ARROW) && play2.y > 5) {
-      play2.y -= 4;
-    }
-    if (keyIsDown(DOWN_ARROW) && play2.y < screenDim) {
-      play2.y += 4;
-    }
-    
-    // Update score
-    if (ball.x < 0) {
-      score[1] += 1;
-      ball = { x: 250, y: 100, vx: 2, vy: 2 };
-    }
-    if (ball.x > screenDim) {
-      score[0] += 1;
-      ball = { x: 250, y: 100, vx: -2, vy: 2 };
-    }
-  
-    // Move the ball
-    ball.x += ball.vx;
-    ball.y += ball.vy;
-    
-  }
+
 
 		const SERVERADDRESS = "http://127.0.0.1:3000";
-		// const margin = { top: 20, right: 30, bottom: 40, left: 50 };
-		// const width = 800 - margin.left - margin.right;
-		// const height = 400 - margin.top - margin.bottom;
-		// const svg = d3.select("#chart")
-		// .append("g")
-		// .attr("transform", `translate(${margin.left},${margin.top})`);
+		const margin = { top: 20, right: 30, bottom: 40, left: 50 };
+		const width = 800 - margin.left - margin.right;
+		const height = 400 - margin.top - margin.bottom;
+		const svg = d3.select("#chart")
+		.append("g")
+		.attr("transform", `translate(${margin.left},${margin.top})`);
 
 
+		const xScale = d3.scaleLinear().range([0, width]);
+		const yScale = d3.scaleLinear().range([height, 0]);
 
+		const line = d3.line()
+			.x((d, i) => xScale(i))
+			.y(d => yScale(d))
+			.curve(d3.curveMonotoneX);
 
+		svg.append("g")
+			.attr("class", "x-axis")
+			.attr("transform", `translate(0, ${height})`);
 
+		svg.append("g")
+			.attr("class", "y-axis");
 
+		let data = [];
 
-
-
-
-
-
-		// const xScale = d3.scaleLinear().range([0, width]);
-		// const yScale = d3.scaleLinear().range([height, 0]);
-
-		// const line = d3.line()
-		// 	.x((d, i) => xScale(i))
-		// 	.y(d => yScale(d))
-		// 	.curve(d3.curveMonotoneX);
-
-		// svg.append("g")
-		// 	.attr("class", "x-axis")
-		// 	.attr("transform", `translate(0, ${height})`);
-
-		// svg.append("g")
-		// 	.attr("class", "y-axis");
-
-		// let data = [];
-
-		// // Initialize the line path
-		// svg.append("path")
-		// .datum(data)
-		// .attr("class", "line")
-		// .attr("fill", "none")
-		// .attr("stroke", "steelblue")
-		// .attr("stroke-width", 2);
+		// Initialize the line path
+		svg.append("path")
+		.datum(data)
+		.attr("class", "line")
+		.attr("fill", "none")
+		.attr("stroke", "steelblue")
+		.attr("stroke-width", 2);
 
 
 		const updateChart = (sensorValue) => {
 
-			play1.y = Math.abs(sensorValue) * 500;  
-			sensorVal = sensorValue;
 
 
 			// Add new data point
-			// data.push(sensorValue);
+			data.push(sensorValue);
 
-			// // Update x and y domains
-			
+			// Update x and y domains
+		
 
+			begin_index = 0
+			if(data.length >20) begin_index = data.length - 20
 
-			// begin_index = 0
-			// if(data.length >20) begin_index = data.length - 20
+			xScale.domain([begin_index, data.length - 1]);
+			yScale.domain([-1.5, 1.5]);
 
-			// xScale.domain([begin_index, data.length - 1]);
-			// yScale.domain([-1.5, 1.5]);
+			// Update x-axis and y-axis
+			svg.select(".x-axis").call(d3.axisBottom(xScale));
+			svg.select(".y-axis").call(d3.axisLeft(yScale));
 
-			// // Update x-axis and y-axis
-			// svg.select(".x-axis").call(d3.axisBottom(xScale));
-			// svg.select(".y-axis").call(d3.axisLeft(yScale));
-
-			// // Update the line path
-			// svg.select(".line")
-			// 	.datum(data)
-			// 	.attr("d", line); // Update the path data
-
-
-
-
-
-
+			// Update the line path
+			svg.select(".line")
+				.datum(data)
+				.attr("d", line); // Update the path data
 
 
 		};
