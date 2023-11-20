@@ -61,7 +61,7 @@ void setup() {
 
 void loop() {
   BLEDevice central = BLE.central();
-  for(int i = 0; i < 4; i++){
+  for(int i = 0; i < 1; i++){
     digitalWrite(trigPins[i], LOW);
     delayMicroseconds(2);
     
