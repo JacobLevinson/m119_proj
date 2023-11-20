@@ -2,10 +2,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-import Axes from './Axes'; // Import the PongGame component
+import SensorGrid from './SensorGrid'; // Import the PongGame component
 
 const SensorData = () => {
-    const [sensorValues1, setSensorValues1] = useState({});
+    const [sensorValues1, setSensorValues1] = useState([1, 2, 3, 4]);
     const [sensorValues2, setSensorValues2] = useState({});
 
     useEffect(() => {
@@ -29,17 +29,17 @@ const SensorData = () => {
 
     return (
         <div>
-            <h2>Sensor Data:</h2>
+            {/* <h2>Sensor Data:</h2>
             <ul>
-                {Object.entries(sensorValues).map(([uuid, value]) => (
+                {Object.entries(sensorValues1).map(([uuid, value]) => (
                     <li key={uuid}>
                         {`Characteristic ${uuid}: ${value}`}
                     </li>
                 ))}
-            </ul>
+            </ul> */}
 
             {/* Pass the sensor value for Player 1 as a prop */}
-            <Axes
+            <SensorGrid
                 Arduino_Values_A={[sensorValues1["2101"], sensorValues1["2102"], sensorValues1["2103"], sensorValues1["2104"]]}
                 Arduino_Values_B={[sensorValues2["2101"], sensorValues2["2102"], sensorValues2["2103"], sensorValues2["2104"]]}
             />
