@@ -50,7 +50,7 @@ const cors = require('cors'); // Import the 'cors' middleware
 const app = express();
 
 app.use(cors()); // Enable CORS for all routes
-const port = 3500
+const port = 3503
 
 // Specify the directory where your EJS templates are located (the "views" directory).
 app.set('views', __dirname + '/views');

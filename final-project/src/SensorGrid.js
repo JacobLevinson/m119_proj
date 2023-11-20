@@ -2,7 +2,7 @@
 
 import React, {useState, useEffect} from 'react';
 
-const MAX_DIST = 4
+const MAX_DIST = 5
 
 
 const SensorGrid = ({ Arduino_Values_A, Arduino_Values_B }) => {
@@ -34,8 +34,8 @@ const SensorGrid = ({ Arduino_Values_A, Arduino_Values_B }) => {
 
       <div className="sensor-object-label" style={{ left: '18%', bottom: '90%',  color: 'white'}}>{sensorValues1[0]}</div>
       <div className="sensor-object-label" style={{ left: '38%', bottom: '90%',  color: 'white'}}>{sensorValues1[1]}</div>
-      <div className="sensor-object-label" style={{ left: '58%', bottom: '90%',  color: 'white'}}>{sensorValues1[2]}</div>      
-      <div className="sensor-object-label" style={{ left: '78%', bottom: '90%',  color: 'white'}}>{sensorValues1[3]}</div>
+      <div className="sensor-object-label" style={{ left: '58%', bottom: '90%',  color: 'white'}}>{sensorValues2[0]}</div>      
+      {/* <div className="sensor-object-label" style={{ left: '78%', bottom: '90%',  color: 'white'}}>{sensorValues1[3]}</div> */}
 
 
       {/* Render floating dots based on sensor data */}
@@ -43,7 +43,7 @@ const SensorGrid = ({ Arduino_Values_A, Arduino_Values_B }) => {
         <div
           key={index}
           className="floating-dot"
-          style={{ left: `${(index+1) * 20}%`, bottom: `${distance/MAX_DIST}%` }}
+          style={{ left: `${(index+1) * 20}%`, top: `${5 + distance/MAX_DIST}%`, hidden: `${distance == 0 || distance > MAX_DIST * 100 ? true : false}%` }}
         ></div>
       ))}
     </div>
