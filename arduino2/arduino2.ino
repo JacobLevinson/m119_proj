@@ -6,8 +6,8 @@
 #define BLE_UUID_ULTRASONIC_3 "2103"
 #define BLE_UUID_ULTRASONIC_4 "2104"
 
-#define BLE_DEVICE_NAME "Jacob"
-#define BLE_LOCAL_NAME "Jacob"
+#define BLE_DEVICE_NAME "Adrian"
+#define BLE_LOCAL_NAME "Adrian"
 
 const int trigPins[4] = {2, 3, 4, 5};
 const int echoPins[4] = {6, 7, 8, 9};
