@@ -20,87 +20,32 @@ const SensorData = () => {
 
     // useEffect(() => {
 
-    //     // TESTING FROM HERE ///
-    //     // const fetchData = () => {
-    //     //     // Simulate changing sensor values
-    //     //     setSensorValues1(prevValues => ({
-    //     //         "2101": getRandomValue(prevValues["2101"]),
-    //     //         "2102": getRandomValue(prevValues["2102"]),
-    //     //         "2103": getRandomValue(prevValues["2103"]),
-    //     //         "2104": getRandomValue(prevValues["2104"])
-    //     //     }));
+        // TESTING FROM HERE ///
+        // const fetchData_1 = () => {
+        //     // Simulate changing sensor values
+        //     setSensorValues1(prevValues => ({
+        //         "2101": getRandomValue(prevValues["2101"]),
+        //         "2102": getRandomValue(prevValues["2102"]),
+        //         "2103": getRandomValue(prevValues["2103"]),
+        //         "2104": getRandomValue(prevValues["2104"])
+        //     }));
 
-    //     //     setSensorValues2(prevValues => ({
-    //     //         "2101": getRandomValue(prevValues["2101"]),
-    //     //         "2102": getRandomValue(prevValues["2102"]),
-    //     //         "2103": getRandomValue(prevValues["2103"]),
-    //     //         "2104": getRandomValue(prevValues["2104"])
-    //     //     }));
-    //     // };
+        //     setSensorValues2(prevValues => ({
+        //         "2101": getRandomValue(prevValues["2101"]),
+        //         "2102": getRandomValue(prevValues["2102"]),
+        //         "2103": getRandomValue(prevValues["2103"]),
+        //         "2104": getRandomValue(prevValues["2104"])
+        //     }));
+        // };
 
-    //     // const getRandomValue = (prevValue) => {
-    //     //     const min = prevValue - 1;
-    //     //     const max = prevValue + 1;
-    //     //     return Math.random() * (max - min) + min;
-    //     // };
+        // const getRandomValue = (prevValue) => {
+        //     const min = prevValue - 1;
+        //     const max = prevValue + 1;
+        //     return Math.random() * (max - min) + min;
+        // };
 
     //     // END TESTING //
 
-    //     const fetchData_1 = async () => {
-    //         try {
-    //             const response = await axios.post('http://localhost:3500/');
-
-    //             setSensorValues1(response.data.sensorValues);
-    //             // setSensorValues2(response.data.sensorValues);
-
-
-
-    //         } catch (error) {
-    //             console.error('Error fetching sensor data:', error);
-    //         }
-    //     };
-
-    //     const fetchData_2 = async () => {
-    //         try {
-
-    //             response = await axios.post('http://localhost:3501/');
-
-    //             // setSensorValues1(response.data.sensorValues1);
-    //             setSensorValues2(response.data.sensorValues);
-
-
-    //         } catch (error) {
-    //             console.error('Error fetching sensor data:', error);
-    //         }
-    //     };
-
-
-
-
-
-
-
-    //     // const fetchData_2 = async () => {
-    //     //     try {
-    //     //         const response = await axios.post('http://localhost:3501/');
-
-    //     //         setSensorValues1(response.data.sensorValues1);
-    //     //         setSensorValues2(response.data.sensorValues2);
-
-    //     //     } catch (error) {
-    //     //         console.error('Error fetching sensor data:', error);
-    //     //     }
-    //     // };
-
-    //     fetchData_1();
-    //     fetchData_2();
-
-    //     // fetchDatae_2
-    //     const interval_1 = setInterval(fetchData_1, 50); // Adjust the interval as needed
-    //     const interval_2 = setInterval(fetchData_2, 50); // Adjust the interval as needed
-
-    //     return () => clearInterval(interval_1);
-    // }, []);
 
     useEffect(() => {
         const fetchData_1 = async () => {
@@ -124,6 +69,7 @@ const SensorData = () => {
         const interval_1 = setInterval(fetchData_1, 50);
         const interval_2 = setInterval(fetchData_2, 50);
     
+
         // Clear intervals when the component unmounts or when you no longer need them
         return () => {
             clearInterval(interval_1);
@@ -134,6 +80,8 @@ const SensorData = () => {
 
     return (
         <div>
+            <h1 style={{ color: 'white' }}>Sensor Data</h1>
+
             <SensorGrid
                 Arduino_Values_A={[sensorValues1["2101"], sensorValues1["2102"], sensorValues1["2103"], sensorValues1["2104"]]}
                 Arduino_Values_B={[sensorValues2["2101"], sensorValues2["2102"], sensorValues2["2103"], sensorValues2["2104"]]}
