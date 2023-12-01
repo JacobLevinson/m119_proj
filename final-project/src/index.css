@@ -18,7 +18,8 @@ code {
 .sensor-grid {
   position: relative;
   width: 100%;
-  height: 900px; /* Set an appropriate height */
+  height: 900px;
+  /* Set an appropriate height */
 }
 
 .sensor-object {
@@ -41,9 +42,9 @@ code {
 
 .floating-dot {
   position: absolute;
-  width: 10px;
-  height: 10px;
-  background-color: #00f;
+  width: 20px;
+  height: 20px;
+  background-color: yellow;
   border-radius: 50%;
   transform: translate(-50%, -50%);
   position: absolute;
