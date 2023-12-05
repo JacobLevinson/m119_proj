@@ -23,7 +23,7 @@ const SensorGrid = ({ Arduino_Values_A, Arduino_Values_B }) => {
   return (
     <div className="sensor-grid">
       {/* Render the foreground image */}
-      <img src={backgroundImage} alt="Foreground Image" className="foreground-image" style={{ width: '1200px', height: 'auto', top : '0px' }} />
+      <img src={backgroundImage} alt="Foreground Image" className="foreground-image" style={{ width: '1200px', height: 'auto', top: '0px' }} />
       {/* Render the four objects */}
 
 
@@ -38,22 +38,22 @@ const SensorGrid = ({ Arduino_Values_A, Arduino_Values_B }) => {
       <div className="sensor-object" style={{ left: '63%', bottom: '88%' }}></div>
       <div className="sensor-object" style={{ left: '73%', bottom: '88%' }}></div>
 
-      {sensorValues1[0] !== 0 && sensorValues1[0] !== MAX_DIST*100 && (
-        <div className="sensor-object-label" style={{ left: '52%', bottom: '93%', color: 'white' }}>
+      {sensorValues1[0] !== 0 && sensorValues1[0] !== MAX_DIST * 100 && (
+        <div className="sensor-object-label" style={{ left: '42%', bottom: '93%', color: 'white' }}>
           {sensorValues1[0]} cm
         </div>
       )}
-      {sensorValues1[1] !== 0 && sensorValues1[1] !== MAX_DIST*100 && (
-        <div className="sensor-object-label" style={{ left: '62%', bottom: '93%', color: 'white' }}>
+      {sensorValues1[1] !== 0 && sensorValues1[1] !== MAX_DIST * 100 && (
+        <div className="sensor-object-label" style={{ left: '52%', bottom: '93%', color: 'white' }}>
           {sensorValues1[1]} cm
         </div>
       )}
-      {sensorValues1[2] !== 0 && sensorValues1[2] !== MAX_DIST*100 && (
-        <div className="sensor-object-label" style={{ left: '42%', bottom: '93%', color: 'white' }}>
+      {sensorValues1[2] !== 0 && sensorValues1[2] !== MAX_DIST * 100 && (
+        <div className="sensor-object-label" style={{ left: '62%', bottom: '93%', color: 'white' }}>
           {sensorValues1[2]} cm
         </div>
       )}
-      {sensorValues1[3] !== 0 && sensorValues1[3] !== MAX_DIST*100 && (
+      {sensorValues1[3] !== 0 && sensorValues1[3] !== MAX_DIST * 100 && (
         <div className="sensor-object-label" style={{ left: '72%', bottom: '93%', color: 'white' }}>
           {sensorValues1[3]} cm
         </div>
@@ -70,24 +70,24 @@ const SensorGrid = ({ Arduino_Values_A, Arduino_Values_B }) => {
       <div className="sensor-object-vert" style={{ left: '25.75%', bottom: '50%' }}></div>
       <div className="sensor-object-vert" style={{ left: '25.75%', bottom: '70%' }}></div>
 
-      {sensorValues2[0] !== 0 && sensorValues2[0] !== MAX_DIST*100 && (<div className="sensor-object-label" style={{ left: '14%', bottom: '9%',  color: 'white' }}>{sensorValues2[0]} cm</div>)}
-      {sensorValues2[1] !== 0 && sensorValues2[1] !== MAX_DIST*100 && (<div className="sensor-object-label" style={{ left: '14%', bottom: '29%', color: 'white' }}>{sensorValues2[1]} cm</div>)}
-      {sensorValues2[2] !== 0 && sensorValues2[2] !== MAX_DIST*100 && (<div className="sensor-object-label" style={{ left: '14%', bottom: '49%', color: 'white' }}>{sensorValues2[2]} cm</div>)}
-      {sensorValues2[3] !== 0 && sensorValues2[3] !== MAX_DIST*100 && (<div className="sensor-object-label" style={{ left: '14%', bottom: '69%', color: 'white' }}>{sensorValues2[3]} cm</div>)}
+      {sensorValues2[0] !== 0 && sensorValues2[0] !== MAX_DIST * 100 && (<div className="sensor-object-label" style={{ left: '14%', bottom: '9%', color: 'white' }}>{sensorValues2[0]} cm</div>)}
+      {sensorValues2[1] !== 0 && sensorValues2[1] !== MAX_DIST * 100 && (<div className="sensor-object-label" style={{ left: '14%', bottom: '29%', color: 'white' }}>{sensorValues2[1]} cm</div>)}
+      {sensorValues2[2] !== 0 && sensorValues2[2] !== MAX_DIST * 100 && (<div className="sensor-object-label" style={{ left: '14%', bottom: '49%', color: 'white' }}>{sensorValues2[2]} cm</div>)}
+      {sensorValues2[3] !== 0 && sensorValues2[3] !== MAX_DIST * 100 && (<div className="sensor-object-label" style={{ left: '14%', bottom: '69%', color: 'white' }}>{sensorValues2[3]} cm</div>)}
 
       {/* Render floating dots based on sensor data */}
       {sensorValues1.map((distance, index) => (
         <div
           key={index}
           className="floating-dot"
-          style={{ left: `${33 + (index + 1) * 10}%`, top: `${10 + (distance / MAX_DIST)/6}%`, hidden: `${distance === 0 || distance >= MAX_DIST * 100 ? true : false}%` }}
+          style={{ left: `${33 + (index + 1) * 10}%`, top: `${10 + (distance / MAX_DIST) / 6}%`, hidden: `${distance === 0 || distance >= MAX_DIST * 100 ? true : false}%` }}
         ></div>
       ))}
       {sensorValues2.map((distance, index) => (
         <div
           key={index}
           className="floating-dot"
-          style={{ bottom: `${-7 + (index + 1) * 20}%`, left: `${25 + (distance / MAX_DIST)/7.5}%`, hidden: `${distance === 0 || distance >= MAX_DIST * 100 ? true : false}%` }}
+          style={{ bottom: `${-7 + (index + 1) * 20}%`, left: `${25 + (distance / MAX_DIST) / 7.5}%`, hidden: `${distance === 0 || distance >= MAX_DIST * 100 ? true : false}%` }}
         ></div>
       ))}
     </div>

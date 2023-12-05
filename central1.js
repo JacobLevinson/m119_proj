@@ -1,7 +1,7 @@
 const noble = require('@abandonware/noble');
 
 const uuid_service = "1101";
-const uuid_values = ["2101", "2102"]; // Array of UUIDs
+const uuid_values = ["2101", "2102", "2103", "2104"]; // Array of UUIDs
 
 let sensorValues = {};
 
