@@ -26,7 +26,7 @@ const SensorData = () => {
     //     setSensorValues1(prevValues => ({
     //         "2101": getRandomValue(prevValues["2101"]),
     //         "2102": getRandomValue(prevValues["2102"]),
-    //         "2103": getRandomValue(prevValues["2103"]),
+    //         "2103": 30, //getRandomValue(prevValues["2103"]),
     //         "2104": getRandomValue(prevValues["2104"])
     //     }));
     // };
@@ -46,9 +46,9 @@ const SensorData = () => {
     //     const min = prevValue - 10;
     //     const max = prevValue + 10;
     //     var value = Math.random() * (max - min) + min;
-    //     // return 0
+    //     // return 1
     //     if (value < 0) return 0;
-    //     else if (value > 300) return 300;
+    //     // else if (value > 500) return 300;
     //     else return Math.round(value)
     // };
 
