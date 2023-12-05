@@ -3,12 +3,14 @@
 #define BLE_UUID_ULTRASONIC_SERVICE "1101"
 #define BLE_UUID_ULTRASONIC_1 "2101"
 #define BLE_UUID_ULTRASONIC_2 "2102"
+#define BLE_UUID_ULTRASONIC_3 "2103"
+#define BLE_UUID_ULTRASONIC_4 "2104"
 
 #define BLE_DEVICE_NAME "Jacob"
 #define BLE_LOCAL_NAME "Jacob"
 
 const int trigPins[4] = {2, 3, 4, 5};
-const int echoPins[4] = {6, 7, 8, 9};
+const int echoPins[4] = {7, 8, 9, 10};
 
 long durations[4];
 int distances[4];
@@ -17,6 +19,8 @@ BLEService ultrasonicService(BLE_UUID_ULTRASONIC_SERVICE);
 
 BLEIntCharacteristic ultrasonicCharacteristic1(BLE_UUID_ULTRASONIC_1, BLERead | BLENotify);
 BLEIntCharacteristic ultrasonicCharacteristic2(BLE_UUID_ULTRASONIC_2, BLERead | BLENotify);
+BLEIntCharacteristic ultrasonicCharacteristic3(BLE_UUID_ULTRASONIC_3, BLERead | BLENotify);
+BLEIntCharacteristic ultrasonicCharacteristic4(BLE_UUID_ULTRASONIC_4, BLERead | BLENotify);
 
 void setup()
 {
@@ -42,11 +46,16 @@ void setup()
 
     ultrasonicService.addCharacteristic(ultrasonicCharacteristic1);
     ultrasonicService.addCharacteristic(ultrasonicCharacteristic2);
+    ultrasonicService.addCharacteristic(ultrasonicCharacteristic3);
+    ultrasonicService.addCharacteristic(ultrasonicCharacteristic4);
 
     BLE.addService(ultrasonicService);
 
     ultrasonicCharacteristic1.writeValue(0);
     ultrasonicCharacteristic2.writeValue(0);
+    ultrasonicCharacteristic3.writeValue(0);
+    ultrasonicCharacteristic4.writeValue(0);
+
     // start advertising
     BLE.advertise();
 
@@ -56,7 +65,7 @@ void setup()
 void loop()
 {
     BLEDevice central = BLE.central();
-    for (int i = 0; i < 2; i++)
+    for (int i = 0; i < 4; i++)
     {
         digitalWrite(trigPins[i], LOW);
         delayMicroseconds(2);
@@ -86,4 +95,6 @@ void loop()
 
     ultrasonicCharacteristic1.writeValue(distances[0]);
     ultrasonicCharacteristic2.writeValue(distances[1]);
+    ultrasonicCharacteristic3.writeValue(distances[2]);
+    ultrasonicCharacteristic4.writeValue(distances[3]);
 }
