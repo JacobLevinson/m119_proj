@@ -33,6 +33,19 @@ code {
   position: absolute;
 }
 
+.sensor-object-vert {
+  position: absolute;
+  width: 5px;
+  height: 50px;
+  background-color: violet;
+  /* border-radius: 50%; */
+  transform: translate(-50%, -50%);
+  color: violet;
+  position: absolute;
+}
+
+
+
 .sensor-object-label {
   position: absolute;
   color: white;

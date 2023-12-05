@@ -29,6 +29,10 @@ const SensorData = () => {
         //         "2103": getRandomValue(prevValues["2103"]),
         //         "2104": getRandomValue(prevValues["2104"])
         //     }));
+        // };
+
+        // const fetchData_2 = () => {
+        //     // Simulate changing sensor values
 
         //     setSensorValues2(prevValues => ({
         //         "2101": getRandomValue(prevValues["2101"]),
@@ -39,19 +43,28 @@ const SensorData = () => {
         // };
 
         // const getRandomValue = (prevValue) => {
-        //     const min = prevValue - 1;
-        //     const max = prevValue + 1;
-        //     return Math.random() * (max - min) + min;
+        //     const min = prevValue - 10;
+        //     const max = prevValue + 10;
+        //     var value = Math.random() * (max - min) + min;
+        //     // return 0
+        //     if (value < 0) return 0;
+        //     else if (value > 300) return 300;
+        //     else return Math.round(value)
         // };
 
-    //     // END TESTING //
+        // END TESTING //
 
-
+        // PRODUCTION //
     useEffect(() => {
         const fetchData_1 = async () => {
             try {
                 const response = await axios.post('http://localhost:3500/');
-                setSensorValues1(response.data.sensorValues);
+                var values = response.data.sensorValues;
+                for (let i = 0; i < values; i++) {
+                    if (values[i] < 0 ) values[i] = 0
+                    else if (values[i] > 300) values[i] = 300
+                }
+                setSensorValues1(values);
             } catch (error) {
                 console.error('Error fetching sensor data 1:', error);
             }
@@ -60,14 +73,19 @@ const SensorData = () => {
         const fetchData_2 = async () => {
             try {
                 const response = await axios.post('http://localhost:3501/');
-                setSensorValues2(response.data.sensorValues);
+                var values = response.data.sensorValues;
+                for (let i = 0; i < values; i++) {
+                    if (values[i] < 0 ) values[i] = 0
+                    else if (values[i] > 300) values[i] = 300
+                }
+                setSensorValues1(values);
             } catch (error) {
                 console.error('Error fetching sensor data 2:', error);
             }
         };
     
-        const interval_1 = setInterval(fetchData_1, 50);
-        const interval_2 = setInterval(fetchData_2, 50);
+        const interval_1 = setInterval(fetchData_1, 150);
+        const interval_2 = setInterval(fetchData_2, 150);
     
 
         // Clear intervals when the component unmounts or when you no longer need them
@@ -75,12 +93,13 @@ const SensorData = () => {
             clearInterval(interval_1);
             clearInterval(interval_2);
         };
+
     }, []); 
 
 
     return (
         <div>
-            <h1 style={{ color: 'white' }}>Sensor Data</h1>
+            <h1 style={{ color: 'Black' }}>Sensor Data</h1>
 
             <SensorGrid
                 Arduino_Values_A={[sensorValues1["2101"], sensorValues1["2102"], sensorValues1["2103"], sensorValues1["2104"]]}

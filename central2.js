@@ -8,6 +8,7 @@ let sensorValues = {};
 noble.on('stateChange', async (state) => {
     if (state === 'poweredOn') {
         console.log("start scanning");
+        noble.startScanning();
         await noble.startScanningAsync([uuid_service], false);
     }
 });
@@ -38,8 +39,6 @@ let readData = async (characteristic) => {
         readData(characteristic);
     }, 10);
 }
-
-
 //
 // hosting a web-based front-end and respond requests with sensor data
 // based on example code on https://expressjs.com/
