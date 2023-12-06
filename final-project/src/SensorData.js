@@ -72,13 +72,13 @@ const SensorData = () => {
 
         const fetchData_2 = async () => {
             try {
-                const response = await axios.post('http://localhost:3501/');
+                const response = await axios.post('http://localhost:3504/');
                 var values = response.data.sensorValues;
                 for (let i = 0; i < values; i++) {
                     if (values[i] < 0) values[i] = 0
                     else if (values[i] > 300) values[i] = 300
                 }
-                setSensorValues1(values);
+                setSensorValues2(values);
             } catch (error) {
                 console.error('Error fetching sensor data 2:', error);
             }
